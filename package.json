@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "dev": "nodemon",
-    "heroku-postbuild": "npm install"
+    "heroku-postbuild": "npm install",
+    "start": "node main"
   },
   "keywords": [],
   "author": "",
