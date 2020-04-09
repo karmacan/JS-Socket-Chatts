@@ -9,6 +9,17 @@ const mysql = require('mysql');
 class Database {
   constructor(config) {
     this.db = mysql.createConnection(config);
+    this.db.connect();
+
+    this.db.on('error', (err) => {
+      if (!err.fatal) return;
+      //if (err.code === "PROTOCOL_CONNECTION_LOST") this.disconnect();
+      this.disconnect();
+    });
+  }
+
+  disconnect() {
+    this.db.destroy();
   }
 
   query(sql, args) {
