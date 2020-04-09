@@ -2,7 +2,8 @@
 /// CONNECT SOCKET
 
 // CONNECT TO SERVER (trigger connection on listener)
-const socket = io.connect('http://localhost:5000'); // socket is client itself 
+// const socket = io.connect('http://localhost:5000'); // socket is client itself 
+const socket = io.connect(_proxy); // socket is client itself 
 
 /// THROW EVENT |test| (with null) [to server]
 //socket.emit('_check', null);
