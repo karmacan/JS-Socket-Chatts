@@ -1,6 +1,7 @@
 // Set audio
 $(document).ready(() => {
-  const audio = new Audio('http://localhost:5000/lost-star.mp3');
+  // const audio = new Audio('http://localhost:5000/lost-star.mp3');
+  const audio = new Audio(`${_proxy}/lost-star.mp3`);
   audio.volume = 0.1;
   audio.play();
 });
@@ -29,6 +30,8 @@ elForm.addEventListener('submit', async (ev) => {
     _alert(resBody.msg);
     return;
   }
+
+  if (res.status !== 200) return;
 
   /// REDIRRECT
   window.location.href = `/chat${queryParams}`;

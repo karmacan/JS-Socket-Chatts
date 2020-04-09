@@ -86,7 +86,8 @@ button:focus {
   width: 2rem;
   height: 2rem;
   margin-right: 0.4rem;
-  background: url('http://localhost:5000/pixel-heart.png');
+  /* background: url('http://localhost:5000/pixel-heart.png'); */
+  background: url('/pixel-heart.png');
   background-size: cover;
   background-position: center;
 }
