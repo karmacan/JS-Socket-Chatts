@@ -24,18 +24,22 @@ class Database {
 ////////////////////////////////////////
 // CONNECT DB
 
-// const db = new Database({
-//   host: 'localhost',
-//   user: 'root',
-//   database: 'db_chat'
-// });
+let db;
 
-const db = new Database({
-  host: 'us-cdbr-iron-east-01.cleardb.net',
-  user: 'b54d128e57063a',
-  password: '31ad088e',
-  database: 'heroku_fe54a47bfdd445f'
+db = new Database({
+  host: 'localhost',
+  user: 'root',
+  database: 'db_chat'
 });
+
+if (process.env.NODE_ENV === 'production') {
+  db = new Database({
+    host: 'us-cdbr-iron-east-01.cleardb.net',
+    user: 'b54d128e57063a',
+    password: '31ad088e',
+    database: 'heroku_fe54a47bfdd445f'
+  });
+}
 
 // * Truncate users on server restart (empty rooms)
 truncUsers();
