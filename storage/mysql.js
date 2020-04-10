@@ -9,17 +9,14 @@ const mysql = require('mysql');
 class Database {
   constructor(config) {
     this.db = mysql.createConnection(config);
-    this.db.connect();
 
     this.db.on('error', (err) => {
       if (!err.fatal) return;
       //if (err.code === "PROTOCOL_CONNECTION_LOST") this.disconnect();
-      this.disconnect();
+      this.db.destroy();
     });
-  }
 
-  disconnect() {
-    this.db.destroy();
+    this.db.connect();
   }
 
   query(sql, args) {
@@ -27,6 +24,15 @@ class Database {
       this.db.query(sql, args, (err, rows) => {
         if (err) return reject(err);
         resolve(rows);
+      });
+    });
+  }
+
+  close() {
+    return new Promise((resolve, reject) => {
+      this.db.end(err => {
+        if (err) return reject(err);
+        resolve();
       });
     });
   }
