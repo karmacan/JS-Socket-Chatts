@@ -22,7 +22,6 @@ class Database {
   }
 
   query(sql, args) {
-    if (!this.db) this.db = mysql.createConnection(config);
     return new Promise((resolve, reject) => {
       // Query makes connect dy default
       this.db.query(sql, args, (err, rows) => {
