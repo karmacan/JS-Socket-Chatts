@@ -8,17 +8,8 @@ const mysql = require('mysql');
 
 class Database {
   constructor(config) {
-    this.db = mysql.createConnection(config);
-
-    this.db.on('error', (err) => {
-      if (err.code === "PROTOCOL_CONNECTION_LOST") {
-        // Destroy is end without exeqution of left queries
-        this.db.destroy(); 
-      }
-      else {
-        throw err;
-      }
-    });
+    //this.db = mysql.createConnection(config);
+    this.db = mysql.createPool(config);
   }
 
   query(sql, args) {
@@ -28,7 +19,7 @@ class Database {
         if (err) return reject(err);
         resolve(rows);
       });
-      this.db.end();
+      //this.db.end(); // don't need for pool query
     });
   }
 
@@ -49,6 +40,7 @@ let db;
 
 if (process.env.NODE_ENV === 'production') {
   db = new Database({
+    connectionLimit: 100, /* for pool connection */
     host: 'us-cdbr-iron-east-01.cleardb.net',
     user: 'b54d128e57063a',
     password: '31ad088e',
@@ -57,6 +49,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 else {
   db = new Database({
+    connectionLimit: 100, /* for pool connection */
     host: 'localhost',
     user: 'root',
     database: 'db_chat'
