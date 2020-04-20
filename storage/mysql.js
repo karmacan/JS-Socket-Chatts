@@ -11,31 +11,36 @@ class Database {
     this.db = mysql.createConnection(config);
 
     this.db.on('error', (err) => {
-      if (!err.fatal) return;
-      //if (err.code === "PROTOCOL_CONNECTION_LOST") this.disconnect();
-      this.db.destroy();
+      if (err.code === "PROTOCOL_CONNECTION_LOST") {
+        // Destroy is end without exeqution of left queries
+        this.db.destroy(); 
+      }
+      else {
+        throw err;
+      }
     });
-
-    this.db.connect();
   }
 
   query(sql, args) {
+    if (!this.db) this.db = mysql.createConnection(config);
     return new Promise((resolve, reject) => {
+      // Query makes connect dy default
       this.db.query(sql, args, (err, rows) => {
         if (err) return reject(err);
         resolve(rows);
       });
+      this.db.end();
     });
   }
 
-  close() {
-    return new Promise((resolve, reject) => {
-      this.db.end(err => {
-        if (err) return reject(err);
-        resolve();
-      });
-    });
-  }
+  // end() {
+  //   return new Promise((resolve, reject) => {
+  //     this.db.end(err => {
+  //       if (err) return reject(err);
+  //       resolve();
+  //     });
+  //   });
+  // }
 }
 
 ////////////////////////////////////////
