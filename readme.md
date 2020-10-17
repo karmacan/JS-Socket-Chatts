@@ -7,7 +7,7 @@ It is a chat application aimed to clone popular chat application like WattsApp o
 Backend was written using tecknologies Node.js, Express.js & Socket.io. Frontend created with native HTML, CSS & JS. For deployment was used Heroku as hosting service and ClearDB for remote MySQL data storage.
 
 # Repo Link
-https://enigmatic-spire-05425.herokuapp.com/
+https://xxx-socket-chat.herokuapp.com/
 
 # App Screens
 <img src="./screen.png" alt="" />
