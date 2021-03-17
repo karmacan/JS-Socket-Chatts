@@ -3,7 +3,7 @@
 // before other js scripts of target
 
 //const _proxy = 'http://localhost:5000';
-const _proxy = 'https://socket-chatt.herokuapp.com';
+const _proxy = 'https://socket-chatts.herokuapp.com';
 
 function _alert(msg = 'Something went wrong!') {
   const alert = document.createElement('div');
