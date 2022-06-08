@@ -1,4 +1,4 @@
-<h1>Socket Chatt</h1>
+<h1>Socket Chat</h1>
 
 # App Discription
 It is a chat application aimed to clone popular chat application like WattsApp or Telegram. User can pick a name and proceed to chat room. Chat messages stored in database, so on other connection they reappear.
